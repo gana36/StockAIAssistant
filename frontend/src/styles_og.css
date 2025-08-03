@@ -1,0 +1,1314 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+/* App container */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header styles */
+header {
+  background-color: #1a202c;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.ticker-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ticker-form input {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 180px;
+}
+
+.ticker-form button {
+  padding: 0.5rem 1rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.ticker-form button:hover {
+  background-color: #3182ce;
+}
+
+.ticker-form button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Main content */
+main {
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+/* Data visualization section */
+.data-visualization {
+  flex: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.chart-container {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.table-container {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.analysis-container {
+  grid-column: 2;
+  grid-row: 2;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container h2, .table-container h2, .analysis-container h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+/* Stock chart */
+.stock-chart {
+  height: 300px;
+  width: 100%;
+}
+
+.loading-chart, .empty-chart, .loading-table, .empty-table, .loading-analysis, .empty-analysis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #718096;
+  font-style: italic;
+}
+
+/* Chart tooltip */
+.chart-tooltip {
+  background-color: rgba(33, 41, 55, 0.85);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 0.85rem;
+}
+
+.chart-tooltip p {
+  margin: 0.1rem 0;
+}
+
+.chart-tooltip .date {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+/* Stock table */
+.stock-table-container {
+  overflow-x: auto;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+  padding: 0.75rem;
+  text-align: right;
+}
+
+.stock-table th:first-child, .stock-table td:first-child {
+  text-align: left;
+}
+
+.stock-table th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #4a5568;
+}
+
+.stock-table tr {
+  border-bottom: 1px solid #edf2f7;
+}
+
+.stock-table tr:last-child {
+  border-bottom: none;
+}
+
+.positive {
+  color: #38a169;
+}
+
+.negative {
+  color: #e53e3e;
+}
+
+/* Advanced Analysis */
+.advanced-analysis {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.analysis-header {
+  margin-bottom: 1rem;
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.tab-button {
+  padding: 0.4rem 0.6rem;
+  background-color: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.tab-button.active {
+  background-color: #4299e1;
+  color: white;
+}
+
+.tab-button:hover:not(.active) {
+  background-color: #cbd5e0;
+}
+
+.run-all-button {
+  padding: 0.4rem 0.6rem;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: auto;
+  transition: all 0.2s;
+}
+
+.run-all-button:hover {
+  background-color: #2f855a;
+}
+
+.run-all-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.analysis-content {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: #f7fafc;
+}
+
+.analysis-text {
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.no-analysis-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #718096;
+  font-style: italic;
+  text-align: center;
+}
+
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loading-spinner {
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #4299e1;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Chat section */
+.chat-section {
+  flex: 2;
+  max-width: 400px;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 1rem;
+  background-color: #4299e1;
+  color: white;
+}
+
+.chat-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.system {
+  align-self: flex-start;
+}
+
+.message-content {
+  padding: 0.75rem;
+  border-radius: 12px;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.message.user .message-content {
+  background-color: #3182ce;
+  color: white;
+  border-top-right-radius: 4px;
+}
+
+.message.system .message-content {
+  background-color: #e2e8f0;
+  color: #2d3748;
+  border-top-left-radius: 4px;
+}
+
+.message-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.message-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px 0 0 4px;
+  font-size: 0.95rem;
+}
+
+.message-form button {
+  padding: 0.75rem 1.25rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.message-form button:hover {
+  background-color: #3182ce;
+}
+
+.message-form button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Code block styling */
+.code-block {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  height: 2rem;
+}
+
+.typing-indicator span {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #a0aec0;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: typing 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-0.5rem);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .data-visualization {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  
+  .chart-container {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .table-container {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .analysis-container {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    flex-direction: column;
+  }
+  
+  .chat-section {
+    max-width: none;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .ticker-form {
+    width: 100%;
+  }
+  
+  .ticker-form input {
+    width: 100%;
+  }
+}
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #3182ce;
+}
+
+.no-analysis-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #718096;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Update the existing loading-analysis class for better visibility */
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #4a5568;
+}
+
+.loading-spinner {
+  margin-bottom: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(66, 153, 225, 0.2);
+  border-radius: 50%;
+  border-top-color: #4299e1;
+  animation: spin 1s ease-in-out infinite;
+}
+/* Add these styles to your styles.css file */
+
+/* Fixed size chat window */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 600px; /* Fixed height */
+  max-height: 600px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: calc(600px - 120px); /* Account for header and input area */
+}
+
+/* Improved Analysis Content Styling */
+.analysis-content {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  max-height: 500px;
+}
+
+.analysis-text {
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Styled Analysis Headers */
+.analysis-text h2 {
+  font-size: 1.5rem;
+  color: #2c5282;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #4299e1;
+}
+
+.analysis-text h3 {
+  font-size: 1.25rem;
+  color: #2b6cb0;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.analysis-text h4 {
+  font-size: 1.1rem;
+  color: #3182ce;
+  margin: 1rem 0 0.5rem;
+}
+
+/* Styled Analysis Lists */
+.analysis-text ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.analysis-text li {
+  margin-bottom: 0.5rem;
+}
+
+/* Styled Analysis Paragraphs */
+.analysis-text p {
+  margin-bottom: 1rem;
+}
+
+/* Styling for important terms */
+.analysis-text strong {
+  color: #2c5282;
+  font-weight: 600;
+}
+
+/* Add styled metrics */
+.metrics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.metric-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #4299e1;
+}
+
+.metric-title {
+  color: #718096;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Sentiment indicators */
+.positive {
+  color: #38a169;
+}
+
+.negative {
+  color: #e53e3e;
+}
+
+.neutral {
+  color: #718096;
+}
+/* Chart Styles - Add to your CSS file */
+
+.chart-container {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  position: relative;
+}
+
+.stock-chart {
+  width: 100%;
+  height: 400px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Enhance chart tooltip */
+.plotly-chart-tooltip {
+  background-color: rgba(33, 41, 55, 0.85) !important;
+  color: white !important;
+  padding: 0.75rem !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  font-size: 0.85rem !important;
+  border: none !important;
+  pointer-events: none;
+}
+
+/* Style Plotly mode bar */
+.modebar {
+  opacity: 0.3 !important;
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+.modebar:hover {
+  opacity: 1 !important;
+}
+
+.modebar-btn {
+  color: #4299e1 !important;
+}
+
+/* Chart title */
+.chart-title {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  z-index: 10;
+}
+
+/* Error and fallback styling */
+.chart-error {
+  background-color: rgba(255, 229, 229, 0.9);
+  color: #c53030;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Loading and empty states */
+.loading-chart, .empty-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #718096;
+  font-style: italic;
+  background-color: rgba(237, 242, 247, 0.5);
+  border-radius: 8px;
+}
+
+/* Responsive chart */
+@media (max-width: 768px) {
+  .stock-chart {
+    height: 300px;
+  }
+}
+
+/* Fallback SVG chart styling */
+.fallback-chart text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fallback-chart path {
+  stroke-width: 2;
+}
+
+.fallback-chart circle:hover {
+  fill: #3182ce;
+  r: 4;
+}
+
+/* Responsive Chat Section */
+@media (max-width: 992px) {
+  .chat-section {
+    max-width: none;
+    height: 500px;
+  }
+  
+  .chat-window {
+    height: 500px;
+    max-height: 500px;
+  }
+  
+  .messages-container {
+    max-height: calc(500px - 120px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/*  We are making changes from here */
+/* Add these styles to your existing CSS file */
+
+/* Main layout styles */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 992px) {
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  
+  .lg\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
+  
+  .lg\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  
+  .lg\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+}
+
+/* Chart and data containers */
+.chart-container, .table-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  height: 100%;
+}
+
+.chart-container h2, .table-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Chat window positioning */
+.chat-window-container {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.5rem;
+  z-index: 50;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile responsiveness for chat */
+@media (max-width: 768px) {
+  .chat-window-container {
+    width: 90% !important;
+    right: 5%;
+    bottom: 5rem;
+  }
+}
+
+/* Dashboard styling */
+.enhanced-dashboard {
+  margin-top: 1.5rem;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Additional spacing */
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+/* Text styling */
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-gray-500 {
+  color: #718096;
+}
+
+.text-gray-700 {
+  color: #4a5568;
+}
+
+.text-gray-800 {
+  color: #2d3748;
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* Loading spinner */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Border utilities */
+.border {
+  border-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-gray-200 {
+  border-color: #e2e8f0;
+}
+
+/* Spacing for lists */
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+
+/* Color utilities */
+.text-green-600 {
+  color: #38a169;
+}
+
+.text-red-600 {
+  color: #e53e3e;
+}
+
+.bg-green-500 {
+  background-color: #48bb78;
+}
+
+.bg-red-500 {
+  background-color: #f56565;
+}
+
+.bg-yellow-500 {
+  background-color: #ecc94b;
+}
+
+.bg-blue-500 {
+  background-color: #4299e1;
+}
+
+.bg-gray-200 {
+  background-color: #edf2f7;
+}
+
+.bg-red-100 {
+  background-color: #fed7d7;
+}
+
+.bg-yellow-100 {
+  background-color: #fefcbf;
+}
+
+.bg-blue-100 {
+  background-color: #ebf8ff;
+}
+
+.text-red-800 {
+  color: #9b2c2c;
+}
+
+.text-yellow-800 {
+  color: #975a16;
+}
+
+.text-blue-800 {
+  color: #2c5282;
+}
+
+.text-white {
+  color: white;
+}
+
+/* Button styling */
+button {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #3182ce;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 0.25rem 0;
+}
+
+/* Custom height for charts */
+.h-64 {
+  height: 16rem;
+}
+.all-tabs-loading-indicator {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 0.5rem;
+}
+
+.loading-dot {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0 0.1rem;
+  background-color: #4299e1;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Loading subtext */
+.loading-subtext {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Enhanced metrics display */
+.sentiment-indicator {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.metric-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #4299e1;
+}
+
+.metric-card .metric-title {
+  color: #718096;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.metric-card .metric-value {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.metric-card .metric-value.positive {
+  color: #38a169;
+}
+
+.metric-card .metric-value.negative {
+  color: #e53e3e;
+}
+
+.metric-card .metric-value.neutral {
+  color: #4a5568;
+}
+
+/* Error state styles */
+.error-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: #e53e3e;
+  background-color: #fff5f5;
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #3182ce;
+  transform: translateY(-2px);
+}
+
+/* Enhanced analysis text */
+.analysis-text h2 {
+  color: #2b6cb0;
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ebf8ff;
+}
+
+.analysis-text h3 {
+  color: #3182ce;
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.analysis-text h4 {
+  color: #4299e1;
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.analysis-text ul {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+.analysis-text li {
+  margin-bottom: 0.5rem;
+}
+
+.analysis-text p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Basic summary styling */
+.basic-summary {
+  padding: 1rem;
+  background-color: #ebf8ff;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3182ce;
+}
+
+.basic-summary h2 {
+  color: #2c5282;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Improved user experience for long waits */
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.spinner {
+  border: 4px solid rgba(66, 153, 225, 0.2);
+  border-radius: 50%;
+  border-top: 4px solid #4299e1;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+/* Improve metrics container for better mobile view */
+.metrics-container {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}

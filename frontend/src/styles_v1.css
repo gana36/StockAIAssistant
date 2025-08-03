@@ -1,0 +1,1626 @@
+Add these rules to the top of your dark-theme.css file
+
+/* Container width control */
+body, html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.app {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Force max-width on all key containers */
+.data-visualization {
+  max-width: 100%;
+  width: 100%;
+}
+
+.chart-container, .table-container, .analysis-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fixed width for analysis content */
+.analysis-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.analysis-text {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all; /* More aggressive word breaking */
+  hyphens: auto;
+}
+
+/* Control line length directly */
+.analysis-text p, 
+.analysis-text li, 
+.analysis-text h2, 
+.analysis-text h3, 
+.analysis-text h4 {
+  max-width: 100%;
+  white-space: normal !important;
+}
+
+.message-content {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* Prevent tables from growing unbounded */
+.stock-table-container {
+  max-width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling for tables */
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+/* Ensure metric cards don't stretch */
+.metrics-container, .sentiment-indicator {
+  width: 100%;
+  max-width: 100%;
+}
+
+.metric-card {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* IMPORTANT: Add !important to core container rules */
+@media (max-width: 1200px) {
+  .data-visualization {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  .chart-container, .table-container, .analysis-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* Force text wrapping with important flag */
+* {
+  white-space: normal !important; /* Force wrapping for all elements */
+}
+
+/* Exceptions to white-space rule */
+pre, code, .code-block {
+  white-space: pre-wrap !important; /* Allow wrapping but preserve spaces */
+  max-width: 100%;
+}
+/* CSS fixes for the chat window */
+
+.chat-window {
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.messages-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.message {
+  max-width: 85%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.message-content {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure code blocks in messages don't cause overflow */
+.message .code-block {
+  max-width: 100%;
+  overflow-x: auto;
+}
+/* CSS for wrapper function */
+.wrapped-text {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
+}
+
+/* Style for long words that need to be broken */
+.message-content {
+  word-break: break-all !important;
+}
+
+/* Ensure the chat window has a fixed width */
+.chat-section {
+  width: 100%;
+  max-width: 400px !important;
+  flex-shrink: 0;
+}
+
+/* Control message width */
+.message {
+  max-width: 85%;
+  box-sizing: border-box;
+}
+
+/* Make sure analysis content is properly constrained */
+.analysis-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.analysis-content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.analysis-text {
+  width: 100%;
+  word-break: break-all !important;
+}
+
+/* Add this to control main containers */
+main {
+  display: flex;
+  flex: 1;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.data-visualization {
+  flex: 3;
+  max-width: calc(100% - 430px);
+  overflow-x: hidden;
+}
+
+@media (max-width: 992px) {
+  .data-visualization {
+    max-width: 100%;
+  }
+}
+
+/* Dark Theme for Stock Analyzer */
+:root {
+  --bg-primary: #121826;
+  --bg-secondary: #1e293b;
+  --bg-card: #283447;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #1d4ed8;
+  --accent-hover: #60a5fa;
+  --positive: #10b981;
+  --negative: #ef4444;
+  --neutral: #94a3b8;
+  --border-color: #334155;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* App container */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header styles */
+header {
+  background-color: var(--bg-secondary);
+  color: white;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent-primary), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.ticker-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ticker-form input {
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 220px;
+  transition: all 0.2s;
+}
+
+.ticker-form input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.ticker-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ticker-form button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.ticker-form button:active {
+  transform: translateY(1px);
+}
+
+.ticker-form button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Main content */
+main {
+  display: flex;
+  flex: 1;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+/* Data visualization section */
+.data-visualization {
+  flex: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+
+.chart-container, .table-container, .analysis-container {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s;
+}
+
+.chart-container:hover, .table-container:hover, .analysis-container:hover {
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.chart-container {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.table-container {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.analysis-container {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container h2, .table-container h2, .analysis-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+/* Stock chart */
+.stock-chart {
+  height: 400px;
+  width: 100%;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.loading-chart, .empty-chart, .loading-table, .empty-table, .loading-analysis, .empty-analysis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-secondary);
+  font-style: italic;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+}
+
+/* Chart tooltip */
+.chart-tooltip {
+  background-color: rgba(20, 30, 50, 0.9);
+  color: white;
+  padding: 0.9rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
+  border: 1px solid var(--accent-primary);
+}
+
+.chart-tooltip p {
+  margin: 0.2rem 0;
+}
+
+.chart-tooltip .date {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: var(--accent-hover);
+}
+
+/* Stock table */
+.stock-table-container {
+  overflow-x: auto;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+  padding: 0.9rem;
+  text-align: right;
+}
+
+.stock-table th:first-child, .stock-table td:first-child {
+  text-align: left;
+}
+
+.stock-table th {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.stock-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s;
+}
+
+.stock-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.stock-table tr:last-child {
+  border-bottom: none;
+}
+
+.positive {
+  color: var(--positive);
+}
+
+.negative {
+  color: var(--negative);
+}
+
+/* Advanced Analysis */
+.advanced-analysis {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.analysis-header {
+  margin-bottom: 1rem;
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tab-button {
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.tab-button.active {
+  background-color: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.tab-button:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.run-all-button {
+  padding: 0.5rem 0.75rem;
+  background-color: var(--positive);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: auto;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.run-all-button:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+}
+
+.run-all-button:disabled {
+  background-color: var(--neutral);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.analysis-content {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background-color: var(--bg-card);
+  margin-top: 1rem;
+}
+
+.analysis-text {
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.no-analysis-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loading-spinner {
+  margin-bottom: 1.25rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--accent-primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Chat section */
+.chat-section {
+  flex: 2;
+  max-width: 400px;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.chat-header {
+  padding: 1.25rem;
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.chat-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-secondary);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.system {
+  align-self: flex-start;
+}
+
+.message-content {
+  padding: 0.9rem;
+  border-radius: 12px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message.user .message-content {
+  background-color: var(--accent-primary);
+  color: white;
+  border-top-right-radius: 4px;
+}
+
+.message.system .message-content {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-top-left-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.message-form {
+  display: flex;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.message-form input {
+  flex: 1;
+  padding: 0.9rem 1.25rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 8px 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.message-form input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.message-form button {
+  padding: 0.9rem 1.5rem;
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.message-form button:hover {
+  background-color: var(--accent-hover);
+}
+
+.message-form button:disabled {
+  background-color: var(--neutral);
+  cursor: not-allowed;
+}
+
+/* Code block styling */
+.code-block {
+  background-color: #1a2234;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  border: 1px solid #2d3748;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 2rem;
+}
+
+.typing-indicator span {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: typing 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-0.5rem);
+    opacity: 1;
+  }
+}
+
+/* Tabs loading indicator */
+.all-tabs-loading-indicator {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 0.5rem;
+}
+
+.loading-dot {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0 0.15rem;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Loading subtext */
+.loading-subtext {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+/* Enhanced metrics display */
+.sentiment-indicator, .metrics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.metric-card {
+  background-color: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid var(--accent-primary);
+  transition: all 0.3s;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.metric-card .metric-title {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-card .metric-value {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.metric-card .metric-value.positive {
+  color: var(--positive);
+}
+
+.metric-card .metric-value.negative {
+  color: var(--negative);
+}
+
+.metric-card .metric-value.neutral {
+  color: var(--text-primary);
+}
+
+/* Error state styles */
+.error-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: #f87171;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 10px;
+  min-height: 200px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.retry-button {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.retry-button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.retry-button:active {
+  transform: translateY(0);
+}
+
+/* Enhanced analysis text */
+.analysis-text h2 {
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.analysis-text h3 {
+  color: var(--accent-hover);
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.analysis-text h4 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.analysis-text ul {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+.analysis-text li {
+  margin-bottom: 0.5rem;
+}
+
+.analysis-text p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+/* Basic summary styling */
+.basic-summary {
+  padding: 1.25rem;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--accent-primary);
+}
+
+.basic-summary h2 {
+  color: var(--accent-hover);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Improved user experience for long waits */
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.spinner {
+  border: 4px solid rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid var(--accent-primary);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 1200px) {
+  .data-visualization {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  
+  .chart-container {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .table-container {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .analysis-container {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    flex-direction: column;
+  }
+  
+  .chat-section {
+    max-width: none;
+    height: 500px;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 1rem;
+  }
+  
+  .ticker-form {
+    width: 100%;
+  }
+  
+  .ticker-form input {
+    width: 100%;
+  }
+  
+  .chart-container, .table-container, .analysis-container {
+    padding: 1rem;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+/* Animated Background Styles */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(18, 24, 38, 0.97) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 24, 38, 0.97) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+}
+
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 25s ease-in-out infinite;
+  z-index: 0;
+}
+
+.blob1 {
+  width: 500px;
+  height: 500px;
+  left: -100px;
+  top: -100px;
+  background: linear-gradient(45deg, #3b82f6, #60a5fa);
+  animation-delay: 0s;
+}
+
+.blob2 {
+  width: 400px;
+  height: 400px;
+  right: -50px;
+  bottom: -50px;
+  background: linear-gradient(45deg, #a78bfa, #818cf8);
+  animation-delay: -5s;
+  animation-duration: 30s;
+}
+
+.blob3 {
+  width: 300px;
+  height: 300px;
+  right: 30%;
+  top: 20%;
+  background: linear-gradient(45deg, #10b981, #34d399);
+  animation-delay: -10s;
+  animation-duration: 20s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* Text wrapping and overflow control */
+
+/* General text wrapping */
+.app {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Chat message text wrapping */
+.message-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+/* Analysis content text wrapping */
+.analysis-content {
+  overflow-x: hidden;
+}
+
+.analysis-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.analysis-text p, 
+.analysis-text li, 
+.analysis-text h2, 
+.analysis-text h3, 
+.analysis-text h4 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Code block text wrapping */
+.code-block {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Table container horizontal scrolling */
+.stock-table-container {
+  max-width: 100%;
+}
+
+/* Fixed width containers for consistent layout */
+.data-visualization {
+  max-width: 100%;
+}
+
+.chat-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Ensure all section containers have proper width constraints */
+.chart-container, .table-container, .analysis-container {
+  max-width: 100%;
+}
+
+/* Metrics cards overflow control */
+.metric-card {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.metric-value {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Force horizontal scrolling for very long words/strings */
+.analysis-text {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word; /* For very long strings without spaces */
+  hyphens: auto; /* Adds hyphens when breaking words */
+}
+
+/* Ensure tables don't break layout */
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+/* =============================================
+   Comprehensive CSS Fixes for Stock Analyzer
+   - Improved scrolling for all components
+   - Fixes for layout and container issues
+   - Better text wrapping and overflow handling
+   ============================================= */
+
+/* ---- Main Layout Structure ---- */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Fixed header with z-index */
+header {
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Main content with proper scrolling */
+main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  position: relative;
+  height: calc(100vh - 80px); /* Subtract header height */
+}
+
+/* ---- Data Visualization Section ---- */
+.data-visualization {
+  flex: 3;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.data-visualization::-webkit-scrollbar {
+  width: 6px;
+}
+
+.data-visualization::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
+}
+
+.data-visualization::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Stock Chart Section ---- */
+.chart-container {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  height: 450px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container h2 {
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.stock-chart {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+}
+
+/* ---- Stock Table Section ---- */
+.table-container {
+  grid-column: 1;
+  grid-row: 2;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container h2 {
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.stock-table-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100% - 60px);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  padding: 0.5rem;
+}
+
+.stock-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+  padding: 0.9rem;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.stock-table th:first-child, .stock-table td:first-child {
+  text-align: left;
+}
+
+/* ---- Analysis Section ---- */
+.analysis-container {
+  grid-column: 2;
+  grid-row: 2;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.advanced-analysis {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.analysis-header {
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-shrink: 0;
+}
+
+.analysis-content {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100% - 80px);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background-color: var(--bg-card);
+  margin-top: 1rem;
+}
+
+.analysis-text {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.analysis-text p, 
+.analysis-text li, 
+.analysis-text h2, 
+.analysis-text h3, 
+.analysis-text h4 {
+  max-width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* ---- Chat Section ---- */
+.chat-section {
+  flex: 1;
+  max-width: 400px;
+  height: calc(100vh - 100px);
+  position: relative;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.chat-header {
+  flex-shrink: 0;
+  padding: 1.25rem;
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: calc(100% - 140px);
+  background-color: var(--bg-secondary);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+}
+
+.message-content {
+  padding: 0.9rem;
+  border-radius: 12px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.message-form {
+  flex-shrink: 0;
+  display: flex;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.code-block {
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1a2234;
+  border: 1px solid #2d3748;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+/* ---- Loading States and Placeholders ---- */
+.loading-chart, .empty-chart, 
+.loading-table, .empty-table, 
+.loading-analysis, .empty-analysis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-secondary);
+  font-style: italic;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+}
+
+.loading-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  flex: 1;
+}
+
+/* ---- Metrics and Indicators ---- */
+.metrics-container, .sentiment-indicator {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+
+.metric-card {
+  background-color: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid var(--accent-primary);
+  transition: all 0.3s;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ---- Animated Background ---- */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* ---- Responsive Breakpoints ---- */
+@media (max-width: 1200px) {
+  .data-visualization {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  
+  .chart-container {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .table-container {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .analysis-container {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .data-visualization, .chat-section {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+  
+  .chat-section {
+    height: 500px;
+    max-width: none;
+  }
+  
+  .data-visualization {
+    margin-bottom: 1.5rem;
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .chart-container, .table-container, .analysis-container {
+    height: auto;
+    min-height: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 1rem;
+  }
+  
+  .ticker-form {
+    width: 100%;
+  }
+  
+  .ticker-form input {
+    width: 100%;
+  }
+}
+
+/* ---- Scrollbar Styling ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ---- Wrapped Text Utilities ---- */
+.wrapped-text {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
