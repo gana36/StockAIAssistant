@@ -467,8 +467,8 @@ CORS(app)  # Enable CORS for all routes
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 # Initialize AgentOps
-# agentops.init(api_key='64ec0862-91a3-4a04-8ee0-db769e2a3222')
-agentops.init(api_key="a0c2f15c-9f2f-48c3-95e3-8e0e446f595d")
+# agentops.init(api_key='')
+agentops.init(api_key="")
 
 @app.route('/api/stock-data', methods=['GET'])
 def get_stock_data():
@@ -918,4 +918,5 @@ def full_analysis():
         }), 200
 
 if __name__ == '__main__':
+
     app.run(debug=True, port=5000)
