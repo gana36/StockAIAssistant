@@ -14,7 +14,7 @@ env/
 ENV/
 backend/venv/
 backend/env/
-
+/doc
 # Environment variables
 .env
 .env.local
