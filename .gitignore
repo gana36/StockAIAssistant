@@ -1,0 +1,250 @@
+# =====================================================================
+# Python Backend
+# =====================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+backend/venv/
+backend/env/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# =====================================================================
+# Node.js Frontend
+# =====================================================================
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite
+.vite/
+vite.config.ts.timestamp-*
+
+# =====================================================================
+# Operating System Files
+# =====================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =====================================================================
+# IDE / Editor Files
+# =====================================================================
+# VS Code
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# =====================================================================
+# API Keys & Sensitive Data
+# =====================================================================
+# Environment files with API keys
+.env
+.env.production
+.env.development
+.env.test
+*.env
+config.json
+secrets.json
+credentials.json
+
+# API key files
+*.key
+*.pem
+*.cert
+
+# =====================================================================
+# Logs
+# =====================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =====================================================================
+# Database
+# =====================================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# =====================================================================
+# Temporary Files
+# =====================================================================
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# =====================================================================
+# Build & Distribution
+# =====================================================================
+/build
+/dist
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =====================================================================
+# Testing
+# =====================================================================
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# =====================================================================
+# Project Specific
+# =====================================================================
+# AgentOps
+agentops_data/
+
+# Local data files
+data/
+downloads/
+uploads/
+
+# Frontend styles created but not used
+frontend/styles.css
+
+# =====================================================================
+# Optional: Keep these if you want to ignore large files
+# =====================================================================
+# *.csv
+# *.xlsx
+# *.pdf

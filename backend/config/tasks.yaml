@@ -1,0 +1,95 @@
+
+# =====================================================================
+# config/tasks.yaml - Task Configuration (COMPLETE)
+# =====================================================================
+
+
+research_task:
+  description: >
+    Conduct a focused research about {topic}.
+    ONLY search Yahoo Finance, CNBC, MarketWatch, Seeking Alpha, or Bloomberg for information about the {ticker} stock.
+    Limit your search to the most recent data. Do not attempt to gather exhaustive information.
+    Your goal is to find 5-10 key facts about {ticker} given the current year is {current_year}.
+    If you encounter any issues or timeouts while searching, provide what information you've found so far.
+  expected_output: >
+    A list with 5-10 bullet points of the most relevant information about {topic}
+  agent: researcher
+
+reporting_task:
+  description: >
+    Analyze the {ticker} stock and answer the {question}.
+    ONLY use Yahoo Finance, CNBC, or MarketWatch to find basic information about {ticker}.
+    Provide a concise answer based on the available information.
+    
+    Please analyze the information to answer the question: {question}
+    
+    Keep your response focused and brief. If you cannot find specific information,
+    state this clearly rather than continuing to search.
+    
+    Your search scope is: {search_scope}
+  expected_output: >
+    Concise answer to the question with key insights, not exceeding 500 words.
+  agent: reporting_analyst
+
+sentiment_analysis_task:
+  description: >
+    Analyze the current market sentiment for {ticker} based on recent news.
+    ONLY search Yahoo Finance and MarketWatch for the following limited information:
+    - Recent news headlines about {ticker} (limit to 5 most recent articles)
+    - Latest analyst ratings if readily available
+    
+    Based on this information, determine if the overall sentiment appears positive, negative, or neutral.
+    Generate a sentiment score on a scale of -100 (extremely negative) to +100 (extremely positive).
+    
+    Your search scope is: {search_scope}
+  expected_output: >
+    A sentiment analysis report (200-300 words) with a sentiment score and brief explanation of key factors.
+  agent: sentiment_analyst
+
+technical_analysis_task:
+  description: >
+    Perform a focused technical analysis on the {ticker} stock.
+    ONLY search TradingView or Barchart to find the following technical indicators:
+    - Current price relative to 50-day and 200-day moving averages
+    - Current RSI value (oversold/overbought)
+    - Basic MACD signal (bullish/bearish)
+    
+    Based on this information, provide a simple trading signal (buy, sell, or hold)
+    with a brief explanation of your reasoning.
+    
+    Your search scope is: {search_scope}
+  expected_output: >
+    A concise technical analysis report (200-300 words) with key indicators and a clear trading recommendation.
+  agent: technical_analyst
+
+quantitative_analysis_task:
+  description: >
+    Conduct a focused quantitative analysis on the {ticker} stock.
+    ONLY search Yahoo Finance or Finviz to find the following key metrics:
+    - Beta value and volatility compared to market
+    - Year-to-date and 1-year return
+    - Basic risk-adjusted performance measure if available
+    
+    Based on this information, provide a brief assessment of the stock's
+    quantitative characteristics and what they mean for investors.
+    
+    Your search scope is: {search_scope}
+  expected_output: >
+    A concise quantitative analysis report (200-300 words) with key metrics and their interpretation.
+  agent: quantitative_analyst
+
+risk_assessment_task:
+  description: >
+    Assess the basic risk profile of {ticker} stock.
+    ONLY search Yahoo Finance or Morningstar to identify:
+    - Current beta value
+    - Primary business risks mentioned in recent analyst reports
+    - Major market risks affecting this stock
+    
+    Based on this information, provide a risk rating from 1 (very low risk) to 10 (extremely high risk)
+    with a brief justification of your rating.
+    
+    Your search scope is: {search_scope}
+  expected_output: >
+    A concise risk assessment report (200-300 words) with a clear risk rating and explanation.
+  agent: risk_manager
